@@ -168,7 +168,7 @@ Add a New Employee
   let employee; 
 
   if (role === "Engineer") {
-      employee = new Engineer (name, id, email, github);
+      employee = new Engineer (github, name, id, email);
 
       console.log(employee);
   
@@ -189,41 +189,28 @@ Add a New Employee
 
 };
 
-
-managerQuestions()
-  .then(employeeQuestions)
-  .then(employeeInput => {
-    return generatePage(employeeInput);
-  })
-  .then(managerInput => {
-    return generatePage(managerInput);
-  })
-  .then(pageHTML => {
-    return fs.writeFile(pageHTML);
-  })
-  .then(writeFileResponse => {
-    console.log(writeFileResponse);
-    return copyFile();
-  })
-  .then(copyFileResponse => {
-    console.log(copyFileResponse);
-  })
-  .catch(err => {
-    console.log(err);
-
-    fs.writeFile('./dist/index.html', pageHTML, err => {
+// function to generate HTML page file using file system 
+const writeFile = data => {
+  fs.writeFile('./dist/index.html', data, err => {
+      // if there is an error 
       if (err) {
-        console.log(err);
-        return;
-      }
-      console.log('Page created! Check out index.html in this directory to see it!');
-    
-      fs.copyFile('./src/style.css', './dist/style.css', err => {
-        if (err) {
           console.log(err);
           return;
-        }
-        console.log('Style sheet copied successfully!');
-      });
-    });
-  });
+      // when the profile has been created 
+      } else {
+          console.log("Your team's profiles have been created!")
+      }
+  })
+}; 
+
+managerQuestions()
+.then(employeeQuestions)
+.then(teamArray => {
+  return generateHTML(teamArray);
+})
+.then(pageHTML => {
+  return writeFile(pageHTML);
+})
+.catch(err => {
+console.log(err);
+});
