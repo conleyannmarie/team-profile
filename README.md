@@ -8,7 +8,7 @@ Includes the testing for each run.
 
 ##Link on how to
 
-chrome-extension://mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/35167b22-8136-41b5-yf7f-ff9f8e086f5d
+https://watch.screencastify.com/v/5Wdp4H4HYaofqtx3PSuZ
 
 
 ## User Story
