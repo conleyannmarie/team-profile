@@ -13,6 +13,7 @@ const Manager = require("./lib/Manager");
 
 const employeeArray = [];
 
+
 // manager questions
 const managerQuestions = () => {
   return inquirer.prompt([
@@ -161,10 +162,11 @@ Add a New Employee
         name: 'confirmAddEmployee',
         message: 'Would you like to add more team members?',
         default: false
+
     }
   ])
 .then(employeeInput => {
-  let {role, name, id, email} = employeeInput
+  let {confirmAddEmployee, school, github,role, name, id, email} = employeeInput
   let employee; 
 
   if (role === "Engineer") {
@@ -178,12 +180,12 @@ Add a New Employee
       console.log(employee);
   }
 
-  teamArray.push(employee); 
+  employeeArray.push(employee); 
 
   if (confirmAddEmployee) {
-      return addEmployee(teamArray); 
+      return employeeQuestions(employeeArray); 
   } else {
-      return teamArray;
+      return employeeArray;
   }
 })
 
